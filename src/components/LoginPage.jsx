@@ -6,15 +6,30 @@ const VALID_PASSWORD = "123456";
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (email === VALID_EMAIL && password === VALID_PASSWORD) {
-      onLogin(email);
-    } else {
-      setError("Invalid email or password. Please try again.");
+    const newErrors = { email: "", password: "" };
+
+    if (!email) {
+      newErrors.email = "Email is required.";
+    } else if (email !== VALID_EMAIL) {
+      newErrors.email = "Invalid email address.";
     }
+
+    if (!password) {
+      newErrors.password = "Password is required.";
+    } else if (email === VALID_EMAIL && password !== VALID_PASSWORD) {
+      newErrors.password = "Incorrect password.";
+    }
+
+    if (newErrors.email || newErrors.password) {
+      setErrors(newErrors);
+      return;
+    }
+
+    onLogin(email);
   }
 
   return (
@@ -32,7 +47,7 @@ export default function LoginPage({ onLogin }) {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setError("");
+                setErrors((prev) => ({ ...prev, email: "" }));
               }}
               placeholder="someone@example.com"
               autoComplete="email"
@@ -48,7 +63,7 @@ export default function LoginPage({ onLogin }) {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setError("");
+                setErrors((prev) => ({ ...prev, password: "" }));
               }}
               placeholder="••••••"
               autoComplete="current-password"
@@ -56,10 +71,11 @@ export default function LoginPage({ onLogin }) {
             />
           </div>
 
-          {error && (
-            <p className="login-error" role="alert">
-              {error}
-            </p>
+          {errors.email && (
+            <p className="login-error" role="alert">{errors.email}</p>
+          )}
+          {errors.password && (
+            <p className="login-error" role="alert">{errors.password}</p>
           )}
 
           <button type="submit" className="login-btn">
