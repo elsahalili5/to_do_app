@@ -18,5 +18,21 @@ export function useTasks() {
     saveTasks(updated);
   }
 
-  return { tasks, addTask };
+  function toggleTask(id) {
+    const updated = tasks.map((t) =>
+      t.id === id ? { ...t, done: !t.done } : t
+    );
+    setTasks(updated);
+    saveTasks(updated);
+  }
+
+  function editTask(id, newTitle) {
+    const updated = tasks.map((t) =>
+      t.id === id ? { ...t, title: newTitle } : t
+    );
+    setTasks(updated);
+    saveTasks(updated);
+  }
+
+  return { tasks, addTask, toggleTask, editTask };
 }
