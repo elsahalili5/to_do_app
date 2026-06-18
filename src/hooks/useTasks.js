@@ -12,8 +12,8 @@ function saveTasks(tasks) {
 export function useTasks() {
   const [tasks, setTasks] = useState(getInitialTasks);
 
-  function addTask(title) {
-    const updated = [...tasks, { id: Date.now(), title, done: false }];
+  function addTask(title, priority = "medium", category = "personal") {
+    const updated = [...tasks, { id: Date.now(), title, priority, category, done: false }];
     setTasks(updated);
     saveTasks(updated);
   }
@@ -34,5 +34,11 @@ export function useTasks() {
     saveTasks(updated);
   }
 
-  return { tasks, addTask, toggleTask, editTask };
+  function deleteTask(id) {
+    const updated = tasks.filter((t) => t.id !== id);
+    setTasks(updated);
+    saveTasks(updated);
+  }
+
+  return { tasks, addTask, toggleTask, editTask, deleteTask };
 }

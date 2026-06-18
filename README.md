@@ -1,16 +1,51 @@
-# React + Vite
+# Local To-Do App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple To-Do application built with React and Vite, featuring authentication, task management, and a dark/light mode toggle. All data is persisted in localStorage.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19
+- Vite 8
+- Tailwind CSS
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Authentication** — Login with test credentials, session persisted in localStorage
+- **Protected route** — To-Do page is inaccessible without logging in
+- **Add tasks** — Input validation, no empty tasks allowed
+- **Task status** — Mark tasks as done/pending via checkbox
+- **Edit tasks** — Inline editing for each task
+- **Delete tasks** — Remove a task from the list
+- **Task counter** — Shows how many tasks are done out of total
+- **Dark / Light mode** — Theme toggle persisted in localStorage
+- **localStorage persistence** — Tasks and session survive page refresh
 
-## Expanding the ESLint configuration
+## Test Credentials
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Field    | Value            |
+|----------|------------------|
+| Email    | intern@test.com  |
+| Password | 123456           |
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── LoginPage.jsx
+│   └── TodoPage.jsx
+├── hooks/
+│   ├── useAuth.js
+│   ├── useTasks.js
+│   └── useTheme.js
+├── App.jsx
+├── main.jsx
+└── index.css
+```
