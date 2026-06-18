@@ -89,12 +89,7 @@ export default function TodoPage({ onLogout }) {
 
       {/* Header */}
       <header className={`px-6 py-4 flex items-center justify-between border-b ${base.header}`}>
-        <div className="flex items-center gap-3">
-          <h1 className={`text-lg font-semibold ${base.text}`}>My Tasks</h1>
-          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${base.badge}`}>
-            {doneTasks}/{tasks.length} done
-          </span>
-        </div>
+        <h1 className={`text-lg font-semibold ${base.text}`}>My Tasks</h1>
         <div className="flex items-center gap-2">
           <button onClick={toggleTheme} className={`text-sm px-3 py-2 rounded-lg border transition-colors cursor-pointer ${isDark ? "border-gray-600 text-gray-300 hover:bg-gray-700" : "border-gray-200 text-gray-600 hover:bg-gray-100"}`}>
             {isDark ? "☀️ Light" : "🌙 Dark"}
@@ -114,7 +109,19 @@ export default function TodoPage({ onLogout }) {
         />
       )}
 
-      <main className="flex flex-col gap-4 w-full max-w-2xl mx-auto px-4 py-8">
+      {/* Stats counters */}
+      <div className="w-full max-w-2xl mx-auto px-4 pt-6 grid grid-cols-2 gap-4">
+        <div className={`rounded-xl border px-6 py-4 flex flex-col items-center gap-1 ${base.card}`}>
+          <span className={`text-4xl font-bold text-violet-600`}>{tasks.length}</span>
+          <span className={`text-sm font-medium ${base.sub}`}>Total Tasks</span>
+        </div>
+        <div className={`rounded-xl border px-6 py-4 flex flex-col items-center gap-1 ${base.card}`}>
+          <span className={`text-4xl font-bold text-green-500`}>{doneTasks}</span>
+          <span className={`text-sm font-medium ${base.sub}`}>Completed</span>
+        </div>
+      </div>
+
+      <main className="flex flex-col gap-4 w-full max-w-2xl mx-auto px-4 py-6">
 
         {/* Add Task Form */}
         <form onSubmit={handleAdd} className="flex flex-col gap-2">
